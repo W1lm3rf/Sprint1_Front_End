@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+}
+
+.navbar-nav{
+    text-align: center;
+}
+
+h1{
+    font-size: 100px;
+}
+
+.barraBusqueda{
+    margin-top: 30px;
+    
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+}
+
+#containerCard{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    
+}
+
+#contenedorFormulario{
+    margin-top: 60px;
+    margin-bottom: 60px;
+    
+}
+
+#contenedorTabla{
+    margin-top: 90px;
+    margin-bottom: 100px;
+    
+
+}
+
+table td, table th{
+    height: 50px;
+    border: 1.5px solid black;
+    
+
+}
