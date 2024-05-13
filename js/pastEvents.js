@@ -102,24 +102,26 @@ const data = {
     ],
 };
 
-let cardsHome = document.getElementById("cardsHome");
+let cardsHome = document.getElementById("cardsPast");
 for (let i = 0; i < data.events.length; i++) {
     let card = document.createElement("div");
-    card.innerHTML = `
-    <div class="card me-3 my-1 h-100 cards-i" style="width: 18rem">
-        <img src="${data.events[i].image}" class="card-img-top" alt="${data.events[i].name}" style="height: 20vh; object-fit: cover;"/>
-        <div class="card-body text-center d-flex flex-column justify-content-around">
-            <h5 class="card-title">${data.events[i].name}</h5>
-            <p class="card-text">
-                ${data.events[i].description}
-            </p>
-            <div class="d-flex justify-content-around align-items-baseline">
-                <p>US ${data.events[i].price} USD</p>
-                <a href="./details.html" class="btn go-details">Details</a>
+    if (data.events[i].date < data.currentDate) {
+        card.innerHTML = `
+        <div class="card me-3 my-1 h-100 cards-i" style="width: 18rem">
+            <img src="${data.events[i].image}" class="card-img-top" alt="${data.events[i].name}" style="height: 20vh; object-fit: cover;"/>
+            <div class="card-body text-center d-flex flex-column justify-content-around">
+                <h5 class="card-title">${data.events[i].name}</h5>
+                <p class="card-text">
+                    ${data.events[i].description}
+                </p>
+                <div class="d-flex justify-content-around align-items-baseline">
+                    <p>US ${data.events[i].price} USD</p>
+                    <a href="./details.html" class="btn go-details">Details</a>
+                </div>
             </div>
         </div>
-    </div>
-    `;
-    card.classList.add("my-3");
-    cardsHome.appendChild(card);
-}
+        `;
+        card.classList.add("my-3");
+        cardsHome.appendChild(card);
+    }
+} 

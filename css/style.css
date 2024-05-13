@@ -22,13 +22,13 @@ h1{
     align-items: center;
 }
 
-#containerCard{
+/* #containerCard{
     margin-top: 50px;
     display: flex;
     justify-content: space-around;
     margin-bottom: 50px;
     
-}
+} */
 
 #contenedorFormulario{
     margin-top: 60px;
@@ -50,16 +50,37 @@ table td, table th{
 
 }
 
-#ContenedorCardDetails{
+/* #ContenedorCardDetails{
     height: 750px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-}
+} */
  
-
+/* 
 #imgDetails{
     height: 100%;
     object-fit: cover;
+}  */
+
+
+
+.cards-i {
+    border: 2px solid rgb(53, 75, 118);
+    
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 2px 1px rgb(44, 114, 255);
+        
+    }
 }
+
+.go-details {
+    background-color: #2f76fb;
+    color: white;
+    font-weight: bold;
+}
+
+
