@@ -49,3 +49,17 @@ table td, table th{
     
 
 }
+
+#ContenedorCardDetails{
+    height: 750px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+ 
+
+#imgDetails{
+    height: 100%;
+    object-fit: cover;
+}
