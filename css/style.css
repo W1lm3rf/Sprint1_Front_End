@@ -65,15 +65,12 @@ table td, table th{
 }
 
 
-
-.cards-i {
-    border: 2px solid rgb(53, 75, 118);
+.card{
+    background-color: rgb(222, 241, 254);
     
-
-    &:hover {
+    &:hover{
         transform: scale(1.05);
-        box-shadow: 0px 0px 2px 1px rgb(44, 114, 255);
-        
+        border: 1px solid black;
     }
 }
 
