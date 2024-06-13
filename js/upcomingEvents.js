@@ -212,7 +212,7 @@ for (let i = 0; i < events.length; i++) {
                 </p>
                 <div class="d-flex justify-content-around align-items-baseline">
                     <p>US ${data.events[i].price} USD</p>
-                    <a href="./details.html" class="btn go-details">Details</a>
+                    <a href="details.html?id=${events[i]._id}" class="btn go-details">Details</a>
                 </div>
             </div>
         </div>
@@ -235,45 +235,85 @@ function unificarCategorias(events) {
   });
 
  
-  let vectorCategories = Array.from(categorias);
+  let vectorCategorias = Array.from(categorias);
 
   
-  return vectorCategories;
+  return vectorCategorias;
 }
 
 
-let vectorCategories = unificarCategorias(data.events);
 
 
 
 
-for(let i=0; i<vectorCategories.length; i++){
+/* categorias */
+function unificarCategorias(events) {
+  
+  let categorias = new Set();
+
+  
+  events.forEach(event => {
+    categorias.add(event.category);
+  });
+
+ 
+  let vectorCategorias = Array.from(categorias);
+
+  
+  return vectorCategorias;
+}
+
+
+let vectorCategorias = unificarCategorias(data.events);
+
+
+
+
+for(let i=0; i<vectorCategorias.length; i++){
     let check = document.createElement("div");
     check.innerHTML=`
       
-          <input class="form-check-input" type="checkbox" id="category-${i}" value="${vectorCategories[i]}">
-          <label class="form-check-label" for="category-${i}">${vectorCategories[i]}</label>
+          <input class="form-check-input" type="checkbox" id="category-${i}" value="${vectorCategorias[i]}">
+          <label class="form-check-label" for="category-${i}">${vectorCategorias[i]}</label>
       `;
      check.classList.add("form-check","form-check-inline");
       
       document.getElementById("Checks").appendChild(check);
 }
 
+/* Filtros */
 
 
-function filterCards() {
-  let selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-  if (selectedCategories.length === 0) {
-    crearCard(data.events);
-  } else {
-      let filteredEvents = data.events.filter(event => selectedCategories.includes(event.category));
-      crearCard(filteredEvents);
+
+let cardsNext = document.getElementById("cardsNext");
+let listaChecks = document.getElementById("Checks");
+let barraBusqueda = document.getElementById('barraBuscar');
+
+function filtros(){
+  let checkboxCheck = document.querySelectorAll("input[type=checkbox]:checked");
+  let categoriasSeleccionadas = Array.from(checkboxCheck).map(cheks =>cheks.value);
+
+  let textoBusqueda = barraBusqueda.value.toLowerCase();
+
+  let filtrados = data.events.filter(cards =>{
+    let coincideCategoria = categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(cards.category);
+
+    let coindeBusqueda = cards.description.toLowerCase().includes(textoBusqueda);
+
+    return coincideCategoria && coindeBusqueda;
+  });
+
+  if(filtrados.length === 0 ){
+    cardsNext.innerHTML = '<div id="noEncontrado"><img src="img/contenidoNoEncontrado.png" alt=""></div>';
+  }else{
+    crearCard(filtrados, cardsNext);
   }
-
-  
 }
 
+listaChecks.addEventListener('change', (evento) =>{
+  filtros();
+})
 
-document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-  checkbox.addEventListener('change', filterCards);
-});
+barraBusqueda.addEventListener('input', (evento)=>{
+  filtros();
+})

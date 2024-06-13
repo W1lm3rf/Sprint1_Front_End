@@ -55,12 +55,14 @@ table td, table th{
     display: flex;
     justify-content: center;
     align-items: center;
+    
 
 } 
  
 
 #imgDetails{
     height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -81,3 +83,11 @@ table td, table th{
 }
 
 
+#noEncontrado{
+    padding-top: 30px;
+    height: 450px;
+    
+}
+#noEncontrado img{
+    height: 100%;
+}

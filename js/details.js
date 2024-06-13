@@ -195,132 +195,41 @@ const data = {
     ],
   };
 
-function crearCard(events) {
-  let cardsPast = document.getElementById("cardsPast");
-  cardsPast.innerHTML = '';
-  for (let i = 0; i < events.length; i++) {
-      let card = document.createElement("div");
-      if (events[i].date < data.currentDate) {
-          card.innerHTML = `
-          <div class="card me-3 my-1 h-100 cards-i" style="width: 18rem">
-              <img src="${data.events[i].image}" class="card-img-top" alt="${data.events[i].name}" style="height: 20vh; object-fit: cover;"/>
-              <div class="card-body text-center d-flex flex-column justify-content-around">
-                  <h5 class="card-title">${data.events[i].name}</h5>
-                  <p class="card-text">
-                      ${data.events[i].description}
-                  </p>
-                  <div class="d-flex justify-content-around align-items-baseline">
-                      <p>US ${data.events[i].price} USD</p>
-                      <a href="details.html?id=${events[i]._id}" class="btn go-details">Details</a>
-                  </div>
-              </div>
-          </div>
-          `;
-          card.classList.add("my-3");
-          cardsPast.appendChild(card);
-      }
-  }
+
+
+function getEventById(id) {
+    return data.events.find(event => event._id === id);
 }
 
-crearCard(data.events);
-
-
-function unificarCategorias(events) {
-  
-  let categorias = new Set();
-
-  
-  events.forEach(event => {
-    categorias.add(event.category);
-  });
-
- 
-  let vectorCategorias = Array.from(categorias);
-
-  
-  return vectorCategorias;
+function displayEventDetails(event) {
+    let eventDetails = document.getElementById('ContenedorCardDetails');
+    if (event) {
+        eventDetails.innerHTML = `
+            <div class="card mb-3" style="max-width: 740px; background-color: gray;
+            padding: 20px;">
+                <div class="row g-0" style="height: 440px; overflow: hidden">
+                    <div class="col-md-4">
+                        <img src="${event.image}" alt="${event.name}" id="imgDetails">
+                    </div>
+                    <div class="col-md-8" style="padding: 20px;">
+                        <div class="card-body" style="background-color: white; height: 100%;">
+                            <h5 class="card-title">${event.name}</h5>
+                            <p class="card-text">${event.description}</p>
+                            <p>Category: ${event.category}</p>
+                            <p>Place: ${event.place}</p>
+                            <p>Date: ${event.date}</p>
+                            <p>Price: $${event.price}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    } 
 }
 
 
+const urlParams = new URLSearchParams(window.location.search);
+const eventId = urlParams.get('id');
+const event = getEventById(eventId);
 
-
-
-
-
-
-
-
-
-
-
-
-/* categorias */
-function unificarCategorias(events) {
-  
-  let categorias = new Set();
-
-  
-  events.forEach(event => {
-    categorias.add(event.category);
-  });
-
- 
-  let vectorCategorias = Array.from(categorias);
-
-  
-  return vectorCategorias;
-}
-
-
-let vectorCategorias = unificarCategorias(data.events);
-
-
-
-
-for(let i=0; i<vectorCategorias.length; i++){
-    let check = document.createElement("div");
-    check.innerHTML=`
-      
-          <input class="form-check-input" type="checkbox" id="category-${i}" value="${vectorCategorias[i]}">
-          <label class="form-check-label" for="category-${i}">${vectorCategorias[i]}</label>
-      `;
-     check.classList.add("form-check","form-check-inline");
-      
-      document.getElementById("Checks").appendChild(check);
-}
-
-/* Filtros */
-
-
-let cardsPast = document.getElementById("cardsPast");
-let listaChecks = document.getElementById("Checks");
-let barraBusqueda = document.getElementById('barraBuscar');
-
-function filtros(){
-  let checkboxCheck = document.querySelectorAll("input[type=checkbox]:checked");
-  let categoriasSeleccionadas = Array.from(checkboxCheck).map(cheks =>cheks.value);
-
-  let textoBusqueda = barraBusqueda.value.toLowerCase();
-
-  let filtrados = data.events.filter(cards =>{
-    let coincideCategoria = categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(cards.category);
-
-    let coindeBusqueda = cards.description.toLowerCase().includes(textoBusqueda);
-
-    return coincideCategoria && coindeBusqueda;
-  });
-
-  if(filtrados.length === 0 ){
-    cardsPast.innerHTML = '<div id="noEncontrado"><img src="img/contenidoNoEncontrado.png" alt=""></div>';
-  }else{
-    crearCard(filtrados, cardsPast);
-  }
-}
-
-listaChecks.addEventListener('change', (evento) =>{
-  filtros();
-})
-
-barraBusqueda.addEventListener('input', (evento)=>{
-  filtros();
-})
+displayEventDetails(event);
