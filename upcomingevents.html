@@ -75,7 +75,7 @@
           
           <!-- Check  -->
           <div class="barraBusqueda">
-            <div id="Checks">
+            <div id="contenedorChecks" class="col-12 col-md-8 col-lg-9  d-flex justify-content-center flex-wrap">
 
               
               
@@ -91,9 +91,14 @@
             
           </div> 
 
+
+
+          <!-- SIN RESULTADOS -->
+          <div id="noEncontrado"> <img src="img/contenidoNoEncontrado.png" alt=""></div>
+
           <!-- Cards -->
 
-          <section id="cardsNext" class="cards d-flex flex-wrap justify-content-center mx-3"></section>
+          <section id="contenedorCards" class="cards d-flex flex-wrap justify-content-center mx-3"></section>
         
     </main>
 
@@ -114,6 +119,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/upcomingEvents.js"></script>
+    <script src="js/upcomingEvents.js" type="module"></script>
+    <script type="module" src="modules/functions.js"></script>
 </body>
 </html>
